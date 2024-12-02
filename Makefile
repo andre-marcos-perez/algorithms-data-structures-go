@@ -9,3 +9,7 @@ format: ## format code
 .PHONY: lint
 lint: ## lint code
 	@go vet ./...
+
+.PHONY: test
+test: ## test code
+	@go test ./...
