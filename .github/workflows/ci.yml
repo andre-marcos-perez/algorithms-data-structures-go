@@ -23,6 +23,29 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Run linter
+        run: |
+          make format
+          make lint
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Setup Go paths
+        id: go-cache-paths
+        run: |
+          echo "go-build=$(go env GOCACHE)" >> $GITHUB_OUTPUT
+          echo "go-mod=$(go env GOMODCACHE)" >> $GITHUB_OUTPUT
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.23.2
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Go build cache
         uses: actions/cache@v4
         with:
@@ -37,7 +60,6 @@ jobs:
         run: go mod verify
       - name: Build
         run: go build ./main.go
-      - name: Run linter
+      - name: Run test
         run: |
-          make format
-          make lint
+          make test
