@@ -32,8 +32,8 @@ func TestStack(t *testing.T) {
 
 	t.Run("pop stack", func(t *testing.T) {
 		stack := NewStack()
-		expectedOnStack := 10
-		err := stack.Push(expectedOnStack)
+		expectedPeek := 10
+		err := stack.Push(expectedPeek)
 		if err != nil {
 			t.Fail()
 		}
@@ -53,7 +53,7 @@ func TestStack(t *testing.T) {
 		if err != nil {
 			t.Fail()
 		}
-		if got != expectedOnStack {
+		if got != expectedPeek {
 			t.Fail()
 		}
 	})
