@@ -93,4 +93,37 @@ func TestList(t *testing.T) {
 			t.Fail()
 		}
 	})
+
+	t.Run("invert array", func(t *testing.T) {
+		list := NewList()
+		arrA := []int{1, 2, 3, 4, 5}
+		arrB := []int{0, 0, 0, 0, 0}
+		for _, v := range arrA {
+			expected := v
+			list.Insert(expected)
+			got, err := list.Peek()
+			if err != nil {
+				t.Fail()
+			}
+			if got.k != expected {
+				t.Fail()
+			}
+		}
+		for i := range arrA {
+			v, err := list.Peek()
+			if err != nil {
+				t.Fail()
+			}
+			v, err = list.Delete(v.k)
+			if err != nil {
+				t.Fail()
+			}
+			arrB[i] = v.k
+		}
+		for i := range arrA {
+			if arrA[i] != arrB[len(arrB)-1-i] {
+				t.Fail()
+			}
+		}
+	})
 }

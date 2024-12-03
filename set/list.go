@@ -59,7 +59,15 @@ func (l *List) Delete(k int) (*ListNode, error) {
 	if err != nil {
 		return nil, err
 	}
-	node.prev.next = node.next
-	node.next.prev = node.prev
+	// delete head
+	if node.prev == nil {
+		l.head = node.next
+	} else {
+		node.prev.next = node.next
+	}
+	// delete tail
+	if node.next != nil {
+		node.next.prev = node.prev
+	}
 	return node, nil
 }
