@@ -8,17 +8,17 @@ var (
 )
 
 type Queue struct {
-	arr  [10]int
-	head int
-	tail int
+	arr    [10]int
+	head   int
+	tail   int
 	isFull bool
 }
 
 func NewQueue() *Queue {
 	return &Queue{
-		arr:  [10]int{},
-		head: 0,
-		tail: 0,
+		arr:    [10]int{},
+		head:   0,
+		tail:   0,
 		isFull: false,
 	}
 }
