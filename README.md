@@ -6,6 +6,7 @@
 
 ### Dynamic Sets
 
+- [Queue](set/queue.go);
 - [Stack](set/stack.go).
 
 ## Contributing
