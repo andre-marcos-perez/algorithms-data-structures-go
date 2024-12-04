@@ -6,15 +6,16 @@ import (
 )
 
 func TestStack(t *testing.T) {
+	t.Parallel()
 
-	t.Run("create stack", func(t *testing.T) {
+	t.Run("create", func(t *testing.T) {
 		stack := NewStack()
 		if stack == nil {
 			t.Fail()
 		}
 	})
 
-	t.Run("push stack", func(t *testing.T) {
+	t.Run("push", func(t *testing.T) {
 		expected := 10
 		stack := NewStack()
 		err := stack.Push(expected)
@@ -30,7 +31,7 @@ func TestStack(t *testing.T) {
 		}
 	})
 
-	t.Run("pop stack", func(t *testing.T) {
+	t.Run("pop", func(t *testing.T) {
 		stack := NewStack()
 		expectedPeek := 10
 		err := stack.Push(expectedPeek)
@@ -58,7 +59,7 @@ func TestStack(t *testing.T) {
 		}
 	})
 
-	t.Run("stack underflow", func(t *testing.T) {
+	t.Run("underflow", func(t *testing.T) {
 		stack := NewStack()
 		_, err := stack.Pop()
 		if err == nil {
@@ -70,7 +71,7 @@ func TestStack(t *testing.T) {
 		}
 	})
 
-	t.Run("stack overflow", func(t *testing.T) {
+	t.Run("overflow", func(t *testing.T) {
 		stack := NewStack()
 		var err error
 		for i := range len(stack.arr) + 1 {
