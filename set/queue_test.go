@@ -6,8 +6,9 @@ import (
 )
 
 func TestQueue(t *testing.T) {
+	t.Parallel()
 
-	t.Run("create queue", func(t *testing.T) {
+	t.Run("create", func(t *testing.T) {
 		queue := NewQueue()
 		if queue == nil {
 			t.Fail()
@@ -58,7 +59,7 @@ func TestQueue(t *testing.T) {
 		}
 	})
 
-	t.Run("queue underflow", func(t *testing.T) {
+	t.Run("underflow", func(t *testing.T) {
 		queue := NewQueue()
 		_, err := queue.Dequeue()
 		if err == nil {
@@ -70,7 +71,7 @@ func TestQueue(t *testing.T) {
 		}
 	})
 
-	t.Run("queue overflow", func(t *testing.T) {
+	t.Run("overflow", func(t *testing.T) {
 		queue := NewQueue()
 		var err error
 		for i := range len(queue.arr) + 1 {

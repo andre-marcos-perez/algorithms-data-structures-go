@@ -6,15 +6,16 @@ import (
 )
 
 func TestList(t *testing.T) {
+	t.Parallel()
 
-	t.Run("create list", func(t *testing.T) {
+	t.Run("create", func(t *testing.T) {
 		list := NewList()
 		if list == nil {
 			t.Fail()
 		}
 	})
 
-	t.Run("insert list", func(t *testing.T) {
+	t.Run("insert", func(t *testing.T) {
 		list := NewList()
 		arr := []int{9, 16, 4, 1}
 		for _, v := range arr {
@@ -37,7 +38,7 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("find list", func(t *testing.T) {
+	t.Run("find", func(t *testing.T) {
 		list := NewList()
 		arr := []int{9, 16, 4, 1}
 		for _, v := range arr {
@@ -66,7 +67,7 @@ func TestList(t *testing.T) {
 		}
 	})
 
-	t.Run("delete list", func(t *testing.T) {
+	t.Run("delete", func(t *testing.T) {
 		list := NewList()
 		arr := []int{9, 16, 4, 1}
 		for _, v := range arr {
