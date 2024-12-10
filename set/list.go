@@ -2,8 +2,10 @@ package set
 
 import "errors"
 
-var ErrListEmpty = errors.New("empty")
-var ErrListNotFound = errors.New("not found")
+var (
+	ErrListEmpty    = errors.New("empty")
+	ErrListNotFound = errors.New("not found")
+)
 
 // List implements an unsorted and double linked list
 type List struct {

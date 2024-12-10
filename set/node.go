@@ -13,3 +13,18 @@ func NewListNode(k int) *ListNode {
 		prev: nil,
 	}
 }
+
+type TreeNode struct {
+	k      int
+	parent *TreeNode
+	left   *TreeNode
+	right  *TreeNode
+}
+
+func NewTreeNode(k int) *TreeNode {
+	return &TreeNode{
+		k:     k,
+		left:  nil,
+		right: nil,
+	}
+}
