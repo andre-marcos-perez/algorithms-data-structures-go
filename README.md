@@ -8,6 +8,10 @@
 
 - [Binary Search](search/binary_search.go).
 
+### Sort
+
+- [Binary Tree Sort](sort/tree.go)
+
 ## Data structures
 
 ### Dynamic Sets
