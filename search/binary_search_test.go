@@ -23,4 +23,25 @@ func TestBinarySearch(t *testing.T) {
 			}
 		}
 	})
+
+	t.Run("unitary", func(t *testing.T) {
+		unitArr := []int{1}
+		var found bool
+		found = BinarySearch(1, &unitArr)
+		if found == false {
+			t.Fail()
+		}
+		found = BinarySearch(2, &unitArr)
+		if found == true {
+			t.Fail()
+		}
+	})
+
+	t.Run("empty", func(t *testing.T) {
+		var emptyArr []int
+		found := BinarySearch(5, &emptyArr)
+		if found == true {
+			t.Fail()
+		}
+	})
 }
