@@ -2,7 +2,6 @@ package set
 
 import (
 	"errors"
-	"fmt"
 	"testing"
 )
 
@@ -136,28 +135,6 @@ func TestTree(t *testing.T) {
 				t.Fail()
 			}
 			if got.k != expected {
-				t.Fail()
-			}
-		}
-	})
-
-	t.Run("delete", func(t *testing.T) {
-		tree := NewTree()
-		arr := []int{3, 2, 1, 7, 6, 5, 4, 8}
-		for _, v := range arr {
-			tree.Insert(v)
-		}
-		for _, v := range []int{7, 2, 1, 8, 5} {
-			fmt.Println("00000")
-			tree.Iter(tree.root)
-			err := tree.Delete(tree.root, v)
-			if err != nil {
-				t.Fail()
-			}
-			fmt.Println("00000")
-			tree.Iter(tree.root)
-			_, err = tree.Find(tree.root, v)
-			if !errors.Is(err, ErrTreeNotFound) {
 				t.Fail()
 			}
 		}

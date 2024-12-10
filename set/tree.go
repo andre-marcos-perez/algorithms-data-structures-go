@@ -146,44 +146,4 @@ func (t *Tree) Next(node *TreeNode, k int) (*TreeNode, error) {
 	return parent, nil
 }
 
-func (t *Tree) Delete(node *TreeNode, k int) error {
-	found, err := t.Find(node, k)
-	if err != nil {
-		return err
-	}
-	// leaf
-	if found.left == nil && found.right == nil {
-		if found.k < found.parent.k {
-			found.parent.left = nil
-		} else {
-			found.parent.right = nil
-		}
-		return nil
-	}
-	// TODO: two child
-	if found.left != nil && found.right != nil {
-		prev, err := t.Prev(t.root, found.k)
-		if err != nil {
-			return err
-		}
-		fmt.Println(prev)
-	}
-
-	// one child
-	if found.left != nil {
-		found.left.parent = found.parent
-		if found.k < found.parent.k {
-			found.parent.left = found.left
-		} else {
-			found.parent.right = found.left
-		}
-	} else {
-		found.right.parent = found.parent
-		if found.k < found.parent.k {
-			found.parent.left = found.left
-		} else {
-			found.parent.right = found.left
-		}
-	}
-	return nil
-}
+// TODO: DELETE
