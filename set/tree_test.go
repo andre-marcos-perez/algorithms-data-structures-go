@@ -31,7 +31,7 @@ func TestTree(t *testing.T) {
 		}
 		for _, v := range arr {
 			expected := v
-			got, err := tree.Find(tree.root, expected)
+			got, err := tree.Find(tree.Root, expected)
 			if err != nil {
 				t.Fail()
 			}
@@ -40,7 +40,7 @@ func TestTree(t *testing.T) {
 			}
 		}
 		expected := 10
-		_, err := tree.Find(tree.root, expected)
+		_, err := tree.Find(tree.Root, expected)
 		if !errors.Is(err, ErrTreeNotFound) {
 			t.Fail()
 		}
@@ -48,7 +48,7 @@ func TestTree(t *testing.T) {
 
 	t.Run("min", func(t *testing.T) {
 		tree := NewTree()
-		_, err := tree.Min(tree.root)
+		_, err := tree.Min(tree.Root)
 		if !errors.Is(err, ErrTreeEmpty) {
 			t.Fail()
 		}
@@ -57,7 +57,7 @@ func TestTree(t *testing.T) {
 			tree.Insert(v)
 		}
 		expected := 1
-		got, err := tree.Min(tree.root)
+		got, err := tree.Min(tree.Root)
 		if err != nil {
 			t.Fail()
 		}
@@ -68,7 +68,7 @@ func TestTree(t *testing.T) {
 
 	t.Run("max", func(t *testing.T) {
 		tree := NewTree()
-		_, err := tree.Min(tree.root)
+		_, err := tree.Min(tree.Root)
 		if !errors.Is(err, ErrTreeEmpty) {
 			t.Fail()
 		}
@@ -77,7 +77,7 @@ func TestTree(t *testing.T) {
 			tree.Insert(v)
 		}
 		expected := 8
-		got, err := tree.Max(tree.root)
+		got, err := tree.Max(tree.Root)
 		if err != nil {
 			t.Fail()
 		}
@@ -93,7 +93,7 @@ func TestTree(t *testing.T) {
 			tree.Insert(v)
 		}
 		for _, v := range []int{1} {
-			got, err := tree.Prev(tree.root, v)
+			got, err := tree.Prev(tree.Root, v)
 			if err != nil {
 				t.Fail()
 			}
@@ -103,7 +103,7 @@ func TestTree(t *testing.T) {
 		}
 		for _, v := range []int{3, 6, 7} {
 			expected := v
-			got, err := tree.Prev(tree.root, expected+1)
+			got, err := tree.Prev(tree.Root, expected+1)
 			if err != nil {
 				t.Fail()
 			}
@@ -120,7 +120,7 @@ func TestTree(t *testing.T) {
 			tree.Insert(v)
 		}
 		for _, v := range []int{8} {
-			got, err := tree.Next(tree.root, v)
+			got, err := tree.Next(tree.Root, v)
 			if err != nil {
 				t.Fail()
 			}
@@ -130,7 +130,7 @@ func TestTree(t *testing.T) {
 		}
 		for _, v := range []int{3, 6, 2} {
 			expected := v
-			got, err := tree.Next(tree.root, expected-1)
+			got, err := tree.Next(tree.Root, expected-1)
 			if err != nil {
 				t.Fail()
 			}

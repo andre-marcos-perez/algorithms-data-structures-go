@@ -2,7 +2,6 @@ package set
 
 import (
 	"errors"
-	"fmt"
 )
 
 var (
@@ -12,28 +11,28 @@ var (
 
 // Tree implements a binary search tree
 type Tree struct {
-	root *TreeNode
+	Root *TreeNode
 }
 
 func NewTree() *Tree {
 	return &Tree{
-		root: nil,
+		Root: nil,
 	}
 }
 
-func (t *Tree) Iter(node *TreeNode) {
+func (t *Tree) Iter(node *TreeNode, sequence *[]int) {
 	if node.left != nil {
-		t.Iter(node.left)
+		t.Iter(node.left, sequence)
 	}
-	fmt.Println(node.k)
+	*sequence = append(*sequence, node.k)
 	if node.right != nil {
-		t.Iter(node.right)
+		t.Iter(node.right, sequence)
 	}
 }
 
 func (t *Tree) Insert(k int) {
 	var parentNode *TreeNode = nil
-	node := t.root
+	node := t.Root
 	for {
 		if node == nil {
 			break
@@ -48,7 +47,7 @@ func (t *Tree) Insert(k int) {
 	node = NewTreeNode(k)
 	node.parent = parentNode
 	if node.parent == nil {
-		t.root = node
+		t.Root = node
 		return
 	}
 	if k < node.parent.k {
