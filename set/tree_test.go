@@ -2,6 +2,7 @@ package set
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 )
 
@@ -86,4 +87,79 @@ func TestTree(t *testing.T) {
 		}
 	})
 
+	t.Run("prev", func(t *testing.T) {
+		tree := NewTree()
+		arr := []int{3, 2, 1, 7, 6, 5, 4, 8}
+		for _, v := range arr {
+			tree.Insert(v)
+		}
+		for _, v := range []int{1} {
+			got, err := tree.Prev(tree.root, v)
+			if err != nil {
+				t.Fail()
+			}
+			if got != nil {
+				t.Fail()
+			}
+		}
+		for _, v := range []int{3, 6, 7} {
+			expected := v
+			got, err := tree.Prev(tree.root, expected+1)
+			if err != nil {
+				t.Fail()
+			}
+			if got.k != expected {
+				t.Fail()
+			}
+		}
+	})
+
+	t.Run("next", func(t *testing.T) {
+		tree := NewTree()
+		arr := []int{3, 2, 1, 7, 6, 5, 4, 8}
+		for _, v := range arr {
+			tree.Insert(v)
+		}
+		for _, v := range []int{8} {
+			got, err := tree.Next(tree.root, v)
+			if err != nil {
+				t.Fail()
+			}
+			if got != nil {
+				t.Fail()
+			}
+		}
+		for _, v := range []int{3, 6, 2} {
+			expected := v
+			got, err := tree.Next(tree.root, expected-1)
+			if err != nil {
+				t.Fail()
+			}
+			if got.k != expected {
+				t.Fail()
+			}
+		}
+	})
+
+	t.Run("delete", func(t *testing.T) {
+		tree := NewTree()
+		arr := []int{3, 2, 1, 7, 6, 5, 4, 8}
+		for _, v := range arr {
+			tree.Insert(v)
+		}
+		for _, v := range []int{7, 2, 1, 8, 5} {
+			fmt.Println("00000")
+			tree.Iter(tree.root)
+			err := tree.Delete(tree.root, v)
+			if err != nil {
+				t.Fail()
+			}
+			fmt.Println("00000")
+			tree.Iter(tree.root)
+			_, err = tree.Find(tree.root, v)
+			if !errors.Is(err, ErrTreeNotFound) {
+				t.Fail()
+			}
+		}
+	})
 }

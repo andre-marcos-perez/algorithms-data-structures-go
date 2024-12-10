@@ -93,3 +93,97 @@ func (t *Tree) Max(node *TreeNode) (*TreeNode, error) {
 		return t.Max(node.right)
 	}
 }
+
+func (t *Tree) Prev(node *TreeNode, k int) (*TreeNode, error) {
+	found, err := t.Find(node, k)
+	if err != nil {
+		return nil, err
+	}
+	// go down
+	if found.left != nil {
+		return t.Max(found.left)
+	}
+	// go up
+	parent := found.parent
+	for {
+		// root reached
+		if parent == nil {
+			break
+		}
+		// inflection reached
+		if parent.left != found {
+			break
+		}
+		found = parent
+		parent = found.parent
+	}
+	return parent, nil
+}
+
+func (t *Tree) Next(node *TreeNode, k int) (*TreeNode, error) {
+	found, err := t.Find(node, k)
+	if err != nil {
+		return nil, err
+	}
+	// go down
+	if found.right != nil {
+		return t.Min(found.right)
+	}
+	// go up
+	parent := found.parent
+	for {
+		// root reached
+		if parent == nil {
+			break
+		}
+		// inflection reached
+		if parent.right != found {
+			break
+		}
+		found = parent
+		parent = found.parent
+	}
+	return parent, nil
+}
+
+func (t *Tree) Delete(node *TreeNode, k int) error {
+	found, err := t.Find(node, k)
+	if err != nil {
+		return err
+	}
+	// leaf
+	if found.left == nil && found.right == nil {
+		if found.k < found.parent.k {
+			found.parent.left = nil
+		} else {
+			found.parent.right = nil
+		}
+		return nil
+	}
+	// TODO: two child
+	if found.left != nil && found.right != nil {
+		prev, err := t.Prev(t.root, found.k)
+		if err != nil {
+			return err
+		}
+		fmt.Println(prev)
+	}
+
+	// one child
+	if found.left != nil {
+		found.left.parent = found.parent
+		if found.k < found.parent.k {
+			found.parent.left = found.left
+		} else {
+			found.parent.right = found.left
+		}
+	} else {
+		found.right.parent = found.parent
+		if found.k < found.parent.k {
+			found.parent.left = found.left
+		} else {
+			found.parent.right = found.left
+		}
+	}
+	return nil
+}
