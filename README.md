@@ -12,8 +12,9 @@
 
 ### Dynamic Sets
 
+- [Binary Search Tree](set/tree.go);
 - [Queue](set/queue.go);
-- [Linked List](set/list.go)
+- [Linked List](set/list.go);
 - [Stack](set/stack.go).
 
 ## Contributing
